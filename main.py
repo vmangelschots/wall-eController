@@ -45,6 +45,10 @@ def main():
                 right_track = round(joystick.get_axis(4),2)
                 left_channel = round(joystick.get_axis(0),2)
                 right_channel = round(joystick.get_axis(3),2)
+                commandServer.setServoChannel(1,left_track);
+                commandServer.setServoChannel(2,right_track);
+                commandServer.setServoChannel(3,left_channel);
+                commandServer.setServoChannel(4,right_channel);
             if event.type == pygame.JOYBUTTONDOWN:
                 for i in range(joystick.get_numbuttons()):
                     if(joystick.get_button(i)):

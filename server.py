@@ -10,7 +10,12 @@ class CommandServer():
     def __init__(self):
         self._serverThread = Thread(target=self.serverThread)
         self._serverThread.start()
+        self.servoChannels = [
+           128,128,128,128,128,128,128
+        ]
 
+    def setServoChannel(self,index,value):
+        self.servoChannels[index-1] = value
     def serverThread(self):
         sock = socket.socket(socket.AF_INET, # Internet
                              socket.SOCK_DGRAM) # UDP
@@ -28,4 +33,7 @@ class CommandServer():
                 print("voltage: {} {} {}".format(adc0*3,adc1*3,adc2*3))
             else:
                 print('unkown command')
-            sock2.sendto(b"SABCDEFG",("192.168.5.177",5006))
+            data = [b"S"]
+            for channel in self.servoChannels:
+                data.append(channel.to_bytes(1,'big'))
+            sock2.sendto(b''.join(data),("192.168.5.177",5006))
