@@ -11,11 +11,11 @@ class CommandServer():
         self._serverThread = Thread(target=self.serverThread)
         self._serverThread.start()
         self.servoChannels = [
-           128,128,128,128,128,128,128
+           128,128,128,128,128,128,128,128,128
         ]
 
     def setServoChannel(self,index,value):
-        self.servoChannels[index-1] = value
+        self.servoChannels[index-1] = value+128
     def serverThread(self):
         sock = socket.socket(socket.AF_INET, # Internet
                              socket.SOCK_DGRAM) # UDP
@@ -25,7 +25,7 @@ class CommandServer():
                              socket.SOCK_DGRAM)  # UDP
         while True:
             data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
-            print(data)
+            #print(data)
             if(data[0]==99):
                 adc0 = int.from_bytes(data[1:3],byteorder='big')
                 adc1 = int.from_bytes(data[3:5],byteorder='big')
@@ -36,4 +36,5 @@ class CommandServer():
             data = [b"S"]
             for channel in self.servoChannels:
                 data.append(channel.to_bytes(1,'big'))
-            sock2.sendto(b''.join(data),("192.168.5.177",5006))
+            sock2.sendto(b''.join(data),("192.168.5.186",5006))
+            print("sending: {}".format(data))
