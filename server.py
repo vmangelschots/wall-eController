@@ -30,7 +30,10 @@ class CommandServer():
                 adc0 = int.from_bytes(data[1:3],byteorder='big')
                 adc1 = int.from_bytes(data[3:5],byteorder='big')
                 adc2 = int.from_bytes(data[5:7],byteorder='big')
-                print("voltage: {} {} {}".format(adc0*3,adc1*3,adc2*3))
+                cell1 = int.from_bytes(data[7:9],byteorder='big')
+                cell2 = int.from_bytes(data[9:11],byteorder='big')
+                cell3 = int.from_bytes(data[11:13],byteorder='big')
+                print("voltage: {} {} {} {} {} {}".format(adc0*3,adc1*3,adc2*3,cell1*3,cell2*3,cell3*3))
             else:
                 print('unkown command')
             data = [b"S"]
