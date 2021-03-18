@@ -2,11 +2,13 @@
 import pygame
 from railvoltagemonitor import RailVoltageMonitor
 from server import CommandServer
+from discovery import discoveryServer
 
 
 # define a main function
 def main():
     commandServer=CommandServer()
+    discoveryS = discoveryServer()
     # initialize the pygame module
     pygame.init()
     #pygame.joystick.init()
