@@ -3,10 +3,11 @@ import pygame
 from railvoltagemonitor import RailVoltageMonitor
 from server import CommandServer
 from discovery import discoveryServer
-
+import logging
 
 # define a main function
 def main():
+    logging.basicConfig(level=logging.DEBUG)
     commandServer=CommandServer()
     discoveryS = discoveryServer()
     # initialize the pygame module
