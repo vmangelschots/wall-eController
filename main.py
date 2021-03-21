@@ -15,7 +15,7 @@ def main():
     #pygame.joystick.init()
 
     #todo: see if the joystick is connected
-    #joystick = pygame.joystick.Joystick(0)
+    joystick = pygame.joystick.Joystick(0)
     # load and set the logo
     #logo = pygame.image.load("logo32x32.png")
     #pygame.display.set_icon(logo)
@@ -45,16 +45,16 @@ def main():
                 running = False
             if event.type == pygame.JOYAXISMOTION:
                 pass
-                # left_track = round(joystick.get_axis(1),2)
-                # right_track = round(joystick.get_axis(4),2)
-                # left_channel = round(joystick.get_axis(0),2)
-                # right_channel = round(joystick.get_axis(3),2)
+                left_track = round(joystick.get_axis(1),2)
+                right_track = round(joystick.get_axis(4),2)
+                left_channel = round(joystick.get_axis(0),2)
+                right_channel = round(joystick.get_axis(3),2)
 
             if event.type == pygame.JOYBUTTONDOWN:
                 pass
-                # for i in range(joystick.get_numbuttons()):
-                #     if(joystick.get_button(i)):
-                #         print("state of button {} = {}".format(i,joystick.get_button(i)))
+                for i in range(joystick.get_numbuttons()):
+                    if(joystick.get_button(i)):
+                        print("state of button {} = {}".format(i,joystick.get_button(i)))
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     right_track = min(right_track + 10,127)
