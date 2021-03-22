@@ -16,14 +16,11 @@ class Listener():
         ip_address = info.parsed_addresses()[0]
         port = info.port
 
-        hostname = socket.gethostname()
-        server_ip_address = socket.gethostbyname(hostname)
-
         logging.info("New wall-e detected. Address: {}:{}".format(ip_address, port))
         logging.debug("Sending connection info to new wall-e")
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         data = [b'C']
-        data.extend(self._ipStringToByteArray(server_ip_address))
+        data.extend(self._ipStringToByteArray(self.get_ip_address()))
         data.append(int(5005).to_bytes(2,byteorder='big'))
 
         print(data)
@@ -34,7 +31,10 @@ class Listener():
         for ip_part in ip_address.split("."):
             result.append(int(ip_part).to_bytes(1,byteorder='big'))
         return result
-
+    def get_ip_address(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
 class discoveryServer():
     def __init__(self):
         self.zconf = Zeroconf()
