@@ -2,6 +2,8 @@ from zeroconf import Zeroconf
 from threading import Thread
 import socket
 import logging
+from robot import Robot,TheBot
+
 
 
 class Listener():
@@ -25,7 +27,7 @@ class Listener():
 
         print(data)
         sock.sendto(b''.join(data), (ip_address,5006))
-
+        TheBot.setConnectionInfo(ip_address,port)
     def _ipStringToByteArray(self,ip_address):
         result = []
         for ip_part in ip_address.split("."):
