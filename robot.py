@@ -132,7 +132,8 @@ class Robot(object):
             for channel in self.motor_channels:
                 data.append(channel.to_bytes(1,'big'))
             sock.sendto(b''.join(data),(self.ip_address,self.port))
-            #print("sending {}".format(data))
+            sleep(0.25)
+            print("sending {}".format(data))
     def setConnectionInfo(self,ip_address,port):
         self.is_connected = True
         self.ip_address = ip_address

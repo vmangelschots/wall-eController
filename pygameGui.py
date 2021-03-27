@@ -33,7 +33,9 @@ class Gui(object):
                 if event.type == pygame.JOYAXISMOTION:
                     #TheBot.absolute_move_track(Robot.LEFT_TRACK,round((self.joystick.get_axis(1)*128)+128))
                     #TheBot.absolute_move_track(Robot.RIGHT_TRACK, round((self.joystick.get_axis(3) * 128) + 128))
-                    TheBot.absolute_move_part(Robot.HEAD_ROTATION,round((self.joystick.get_axis(3) * 128) + 128))
+                    TheBot.absolute_move_part(Robot.HEAD_ROTATION,round((self.joystick.get_axis(2) * 128) + 128))
+                    TheBot.absolute_move_part(Robot.NECK_HEIGHT, round((self.joystick.get_axis(3) * 128) + 128))
+                    TheBot.absolute_move_part(Robot.NECK_TILT, round((self.joystick.get_axis(1) * 128) + 128))
                     #                 right_track = round(joystick.get_axis(4),2)
                     #                 left_channel = round(joystick.get_axis(0),2)
                     #                 right_channel = round(joystick.get_axis(3),2)
